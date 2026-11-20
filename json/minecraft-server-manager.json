@@ -1,0 +1,49 @@
+{
+  "name": "Minecraft Server Manager",
+  "slug": "minecraft-server-manager",
+  "categories": [24],
+  "date_created": "2026-11-20",
+  "type": "ct",
+  "updateable": true,
+  "privileged": false,
+  "interface_port": 25564,
+  "documentation": "https://github.com/anefzaoui/minecraft-server-manager/tree/main/docs",
+  "website": "https://github.com/anefzaoui/minecraft-server-manager",
+  "repository": "https://github.com/anefzaoui/minecraft-server-manager",
+  "architectures": ["amd64"],
+  "platforms": ["pve"],
+  "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons@main/webp/minecraft.webp",
+  "description": "Self-hosted control panel for Minecraft servers that run as Docker containers on the itzg/minecraft-server image. Guided server creation, pinned modpacks with rollback, Modrinth/CurseForge/Hangar browsing, live console, backups, schedules, crash analysis and multi-user roles.",
+  "install_methods": [
+    {
+      "type": "default",
+      "script": "ct/minecraft-server-manager.sh",
+      "config_path": "/opt/minecraft-server-manager/.env",
+      "resources": {
+        "cpu": 4,
+        "ram": 8192,
+        "hdd": 32,
+        "os": "Debian",
+        "version": "13"
+      }
+    }
+  ],
+  "default_credentials": {
+    "username": null,
+    "password": null
+  },
+  "notes": [
+    {
+      "text": "First-run setup asks for a 6-digit PIN. Get it inside the container with: journalctl -u minecraft-server-manager | grep -o '\"pin\":\"[0-9]*\"'",
+      "type": "info"
+    },
+    {
+      "text": "Game servers publish their own ports from 25565 upward (Bedrock from 19132). Size RAM and disk for the servers you plan to run.",
+      "type": "info"
+    },
+    {
+      "text": "The panel controls Docker in this container, so its admin login is root-equivalent here. Do not expose it to the internet without a TLS reverse proxy.",
+      "type": "warning"
+    }
+  ]
+}
